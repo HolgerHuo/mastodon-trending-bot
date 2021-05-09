@@ -83,20 +83,6 @@ def construct_status():
         sys.exit()
         
     tags = json.loads(data)
-    
-    if not tags:
-        # Exits if no tags trending
-        if no_trends_status:
-            post = no_trends_status
-            logger.info(
-                f"No tags trending."
-            )
-            return post
-        else:
-            logger.info(
-                    f"No tags trending. Exiting now."
-            )
-            sys.exit()
              
     if status_body:
         post = status_body
@@ -109,13 +95,30 @@ def construct_status():
         if blacklist_raw:
             for line in blacklist_raw.splitlines():
                 blacklist.append(line)
-            
-    for tag in tags:
-        if not tag["name"] in blacklist:
-            # Check if exists in blacklist
-            post += '#' + tag["name"] + '\n'
 
-    return post
+    tag_list = ''
+    if tags:
+        for tag in tags:
+            if not tag["name"] in blacklist:
+                # Check if exists in blacklist
+                tag_list += '#' + tag["name"] + '\n'
+                
+    if tag_list:
+        post = post + tag_list
+        return post
+    else:
+        if no_trends_status:
+            post = no_trends_status
+            logger.info(
+                f"No tags trending."
+            )
+            return post
+        else:
+            logger.info(
+                    f"No tags trending. Exiting now."
+            )
+            sys.exit()
+   
 
 def toot(post):
     # Toot the toot!
