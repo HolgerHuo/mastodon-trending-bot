@@ -56,12 +56,12 @@ def config(key):
     if config.get(key):
         return config.get(key)
     else:
-        logger.critical(
-            f"{key} not found in config or in the environment. Exiting."
-        )
-        sys.exit()
+        return False
         
-# Retreive all configurations       
+# Retreive all configurations 
+if not config("MTB_APP_NAME") or not config("MTB_SOURCE_INSTANCE") or not config("MTB_DEST_INSTANCE") or not config("MTB_APP_SECURE_TOKEN") or not config("MTB_STATUS_VISIBILITY"):
+    logger.critical("Config file incomplete. Exiting.")
+    sys.exit()
 app_name = config("MTB_APP_NAME")
 mastodon_source_url = config("MTB_SOURCE_INSTANCE")
 mastodon_dest_url = config("MTB_DEST_INSTANCE")
@@ -69,6 +69,7 @@ mastodon_dest_token = config("MTB_APP_SECURE_TOKEN")
 tag_blacklist_path = config("MTB_BLACKLIST_PATH")
 status_body = config("MTB_STATUS_BODY")
 status_visibility = config("MTB_STATUS_VISIBILITY")
+no_trends_status = config("MTB_NO_TRENDS_STATUS")
 
 def construct_status():
     # Constructing status body 
@@ -85,21 +86,29 @@ def construct_status():
     
     if not tags:
         # Exits if no tags trending
-        logger.info(
-            f"No tags trending. Exiting now."
-        )
-        sys.exit()
+        if no_trends_status:
+            post = no_trends_status
+            logger.info(
+                f"No tags trending."
+            )
+            return post
+        else:
+            logger.info(
+                    f"No tags trending. Exiting now."
+            )
+            sys.exit()
              
     if status_body:
         post = status_body
     else:
         post = ""
-
-    blacklist_raw = read_file(os.path.join(base_path, tag_blacklist_path))
+        
     blacklist = []
-    if blacklist_raw:
-        for line in blacklist_raw.splitlines():
-            blacklist.append(line)
+    if tag_blacklist_path:
+        blacklist_raw = read_file(os.path.join(base_path, tag_blacklist_path))
+        if blacklist_raw:
+            for line in blacklist_raw.splitlines():
+                blacklist.append(line)
             
     for tag in tags:
         if not tag["name"] in blacklist:

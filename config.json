@@ -5,5 +5,6 @@
     "MTB_DEST_INSTANCE": "https://botsin.space",
     "MTB_APP_SECURE_TOKEN": "xxxxxx",
     "MTB_BLACKLIST_PATH": "blacklist.txt",
-    "MTB_STATUS_VISIBILITY": "public"
+    "MTB_STATUS_VISIBILITY": "public",
+    "MTB_NO_TRENDS_STATUS": "#当下流行 \n当下没有流行标签哦～\n大家可以使用Hashtags帮助你的嘟文被快速发现w！"
 }
