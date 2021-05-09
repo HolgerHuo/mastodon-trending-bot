@@ -1,0 +1,9 @@
+{
+    "MTB_APP_NAME": "MastodonTrendingBot",
+    "MTB_STATUS_BODY": "#当下流行 \n嘟嘟嘟！这是本时段 Island岛屿 的流行标签 \n要记得善用Hashtags来帮助联邦宇宙发现你的嘟文噢～ \n\n",
+    "MTB_SOURCE_INSTANCE": "https://mast.dragon-fly.club",
+    "MTB_DEST_INSTANCE": "https://botsin.space",
+    "MTB_APP_SECURE_TOKEN": "xxxxxx",
+    "MTB_BLACKLIST_PATH": "blacklist.txt",
+    "MTB_STATUS_VISIBILITY": "public"
+}
