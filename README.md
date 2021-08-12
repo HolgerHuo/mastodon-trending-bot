@@ -6,6 +6,8 @@ A mastodon trending bot that aggregates trending tags from json api and toot wit
 
 用 Python 实现的定时推送Mastodon流行标签机器人
 
+[Example 示例](https://mast.dragon-fly.club/@trends)
+
 ## Usage 用法
 
 Clone the repository, enter the directory, change configurations file and run mtb.py using python3. You may specify a config.json adding directly to the arguments.
@@ -35,12 +37,19 @@ python3 mtb.py # or using python3 mtb path_to_config
 }
 ```
 **MTB_APP_NAME**: App name, used when tooting and displayed on web interface 机器人名称，会显示在Web界面中
+
 **MTB_SOURCE_INSTANCE**: Trending tags source instance 获取流行信息的实例
+
 **MTB_DEST_INSTANCE**: Toot destination instance 嘟文发送至的实例
+
 **MTB_APP_SECURE_TOKEN**: Bot account token 机器人账户密钥 https://instance.tld/settings/applications
+
 **MTB_STATUS_VISIBILITY**: Toot visibility 嘟文可见度 (public, unlisted)
+
 **MTB_STATUS_BODY (Optional 可选)**:  Personalized toot body 自定义嘟文内容 
+
 **MTB_BLACKLIST_PATH (Optional 可选)**: Specifying blacklist file path 黑名单路径
+
 **MTB_NO_TRENDS_STATUS (Optional 可选)**: Status to post when no tags trending 无当下流行标签时的嘟文
 
 
